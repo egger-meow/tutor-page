@@ -1,0 +1,440 @@
+/* =====================================================
+   新竹家教 Landing Page — 溫暖、極簡、可信賴
+   ===================================================== */
+
+:root {
+  --bg: #FBFAF7;
+  --surface: #FFFFFF;
+  --surface-alt: #F3F1EB;
+  --ink: #1D2530;
+  --ink-soft: #4A5261;
+  --muted: #757D8A;
+  --primary: #1F4E79;        /* 深藍：專業、可信 */
+  --primary-dark: #173C5E;
+  --accent: #B97B2A;         /* 暖金：溫度，少量使用 */
+  --line-green: #06C755;     /* LINE 官方綠 */
+  --line-green-dark: #05A847;
+  --border: #E5E1D8;
+  --radius: 14px;
+  --shadow: 0 1px 3px rgba(29, 37, 48, 0.06), 0 8px 24px rgba(29, 37, 48, 0.06);
+  --font: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container.narrow { max-width: 760px; }
+
+h1, h2, h3 { line-height: 1.35; margin: 0 0 0.6em; }
+h2 { font-size: clamp(1.5rem, 3.2vw, 2rem); text-align: center; }
+h3 { font-size: 1.08rem; }
+p { margin: 0 0 1em; }
+a { color: var(--primary); }
+
+.section { padding: 72px 0; }
+.section-alt { background: var(--surface-alt); }
+.section-lead {
+  text-align: center;
+  color: var(--ink-soft);
+  max-width: 620px;
+  margin: -0.4em auto 2.2em;
+}
+
+/* ---------- 按鈕 ---------- */
+.btn {
+  display: inline-block;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-line { background: var(--line-green); color: #fff; }
+.btn-line:hover { background: var(--line-green-dark); }
+.btn-outline {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+}
+.btn-outline:hover { background: var(--primary); color: #fff; }
+.btn-sm { padding: 9px 20px; font-size: 0.92rem; }
+.btn-block { display: block; width: 100%; }
+
+/* ---------- 頁首 ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 250, 247, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  height: 62px;
+}
+.brand {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand-sub {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin-left: 8px;
+}
+.site-nav { display: flex; gap: 22px; }
+.site-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.site-nav a:hover { color: var(--primary); }
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 64px 0 72px;
+  background: linear-gradient(180deg, #F6F3EC 0%, var(--bg) 100%);
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-eyebrow {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.8em;
+}
+.hero h1 {
+  font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+  letter-spacing: 0.01em;
+}
+.hero-lead { color: var(--ink-soft); font-size: 1.05rem; max-width: 34em; }
+.hero-lead strong { color: var(--ink); }
+
+.hero-chips {
+  list-style: none;
+  padding: 0;
+  margin: 1.4em 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hero-chips li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 0.9em; }
+.hero-note { color: var(--muted); font-size: 0.88rem; }
+
+.hero-photo { margin: 0; }
+.hero-photo img {
+  width: 100%;
+  height: auto;
+  max-width: 380px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+
+/* ---------- 卡片 ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 2.4em;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+  box-shadow: var(--shadow);
+}
+.card h3 { color: var(--primary); }
+.card p { margin: 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+/* ---------- 科目 ---------- */
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-top: 2.4em;
+}
+.subject {
+  background: var(--surface);
+  border-left: 4px solid var(--primary);
+  border-radius: 10px;
+  padding: 22px 22px 18px;
+  box-shadow: var(--shadow);
+}
+.subject h3 { margin-bottom: 0.4em; }
+.subject p { margin: 0; color: var(--ink-soft); font-size: 0.93rem; }
+
+/* ---------- 差異化清單 ---------- */
+.diff-list {
+  list-style: none;
+  padding: 0;
+  max-width: 720px;
+  margin: 2em auto 0;
+  display: grid;
+  gap: 14px;
+}
+.diff-list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 15px 20px 15px 52px;
+  position: relative;
+  color: var(--ink-soft);
+}
+.diff-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 20px;
+  color: var(--line-green);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.diff-list strong { color: var(--ink); }
+
+/* ---------- 教學理念 ---------- */
+.philosophy-text {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 0;
+}
+.philosophy-text strong { color: var(--primary); font-size: 1.15em; }
+
+/* ---------- 回饋 ---------- */
+.testimonial {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.testimonial p { color: var(--ink-soft); font-size: 0.95rem; }
+.testimonial footer { color: var(--muted); font-size: 0.88rem; font-weight: 500; }
+.placeholder-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 1.6em;
+}
+
+/* ---------- 證明文件 ---------- */
+.proof-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin-top: 2.2em;
+}
+.proof-item { margin: 0; text-align: center; }
+.proof-item img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.proof-item figcaption {
+  margin-top: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+/* ---------- 簡歷 ---------- */
+.resume {
+  margin: 2em 0;
+  border-top: 1px solid var(--border);
+}
+.resume-row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 18px;
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--border);
+}
+.resume dt { font-weight: 700; color: var(--primary); }
+.resume dd { margin: 0; color: var(--ink-soft); }
+#resume .btn { display: block; max-width: 260px; margin: 0 auto; }
+
+/* ---------- FAQ ---------- */
+.faq-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  padding: 0 20px;
+  box-shadow: var(--shadow);
+}
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 700;
+  padding: 16px 0;
+  list-style: none;
+  position: relative;
+  padding-right: 32px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary);
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+.faq-item[open] summary::after { content: "−"; }
+.faq-item p { color: var(--ink-soft); padding-bottom: 16px; margin: 0; }
+
+/* ---------- 聯絡 ---------- */
+.contact-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #EFEBE1 100%);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-top: 2em;
+}
+.form-embed iframe {
+  width: 100%;
+  min-height: 720px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+.form-placeholder {
+  background: var(--surface);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+  color: var(--muted);
+}
+.form-placeholder code {
+  background: var(--surface-alt);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.88em;
+}
+.contact-aside {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: var(--shadow);
+}
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: grid;
+  gap: 10px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.contact-tip {
+  font-size: 0.86rem;
+  color: var(--muted);
+  background: var(--surface-alt);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 0;
+}
+
+/* ---------- 頁尾 ---------- */
+.site-footer {
+  background: var(--ink);
+  color: #B8BEC9;
+  padding: 32px 0 88px; /* 底部留空間給手機 CTA */
+  font-size: 0.88rem;
+}
+.footer-inner { text-align: center; }
+.footer-inner p { margin: 0 0 6px; }
+.footer-keywords { color: #7A828F; font-size: 0.8rem; }
+
+/* ---------- 手機固定 CTA ---------- */
+.mobile-cta {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  gap: 10px;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--border);
+}
+.mobile-cta .btn { flex: 1; padding: 12px 8px; font-size: 0.95rem; }
+
+/* ---------- RWD ---------- */
+@media (max-width: 900px) {
+  .card-grid, .subject-grid { grid-template-columns: repeat(2, 1fr); }
+  .proof-grid { grid-template-columns: repeat(3, 1fr); }
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero-photo img { max-width: 280px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .site-nav { display: none; }
+}
+
+@media (max-width: 560px) {
+  .section { padding: 52px 0; }
+  .card-grid, .subject-grid { grid-template-columns: 1fr; }
+  .proof-grid { grid-template-columns: repeat(2, 1fr); }
+  .resume-row { grid-template-columns: 1fr; gap: 2px; }
+  .mobile-cta { display: flex; }
+  .header-inner .btn { display: none; }
+  .brand-sub { display: none; }
+}
