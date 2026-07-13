@@ -119,6 +119,28 @@ a { color: var(--primary); }
 }
 .site-nav a:hover { color: var(--primary); }
 
+.personal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.88rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.personal-link:hover { background: var(--accent); color: #fff; }
+.personal-link-full { display: none; }
+.personal-link-short { display: inline; }
+@media (min-width: 901px) {
+  .personal-link-full { display: inline; }
+  .personal-link-short { display: none; }
+}
+
 /* ---------- Hero ---------- */
 .hero {
   padding: 64px 0 72px;
@@ -245,28 +267,10 @@ a { color: var(--primary); }
 }
 .philosophy-text strong { color: var(--primary); font-size: 1.15em; }
 
-/* ---------- 回饋 ---------- */
-.testimonial {
-  margin: 0;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
-}
-.testimonial p { color: var(--ink-soft); font-size: 0.95rem; }
-.testimonial footer { color: var(--muted); font-size: 0.88rem; font-weight: 500; }
-.placeholder-hint {
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.85rem;
-  margin-top: 1.6em;
-}
-
 /* ---------- 證明文件 ---------- */
 .proof-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 18px;
   margin-top: 2.2em;
 }
@@ -286,6 +290,15 @@ a { color: var(--primary); }
   font-weight: 500;
   color: var(--ink-soft);
 }
+.proof-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+.proof-link:hover { text-decoration: underline; }
 
 /* ---------- 簡歷 ---------- */
 .resume {

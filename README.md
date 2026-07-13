@@ -29,9 +29,8 @@
 | `profile-placeholder.svg` | 個人照（建議比例 380×460，直式） |
 | `cert-cap.svg` | 會考成績單 |
 | `cert-toeic.svg` | 多益證書 |
-| `cert-student-id.svg` | 學生證 |
-| `cert-award.svg` | 獎狀 |
-| `cert-other.svg` | 其他證明 |
+| `cert-admission.svg` | 陽明交大入學證明 |
+| `cert-diploma.svg` | 陽明交大畢業證書 |
 
 方法 B（用 jpg/png）：把圖片放進 `assets/images/`，然後改 `scripts/config.js` 的 `images` 路徑，例如：
 
@@ -39,7 +38,12 @@
 profile: "assets/images/my-photo.jpg",
 ```
 
-> 隱私提醒：證書、學生證上傳前請遮蔽身分證字號、學號、地址等個資。
+> 隱私提醒：證書、入學證明、畢業證書上傳前請遮蔽身分證字號、學號、地址等個資。
+
+**新增其他證明文件（例如英文檢定、獲獎等）：** 目前網站只顯示已有真實文件的項目，沒有的不放空卡片。之後若有新的證明，做法是：
+1. 把圖片放進 `assets/images/`。
+2. 在 `scripts/config.js` 的 `images` 物件加一行，例如 `otherCert: "assets/images/cert-xxx.svg"`。
+3. 在 `index.html` 的 `proof-grid` 內複製一個 `<figure class="proof-item">` 區塊，改成對應的 `data-config-img`、`alt`、`figcaption`。
 
 ### 2. 替換 LINE / 電話 / Email
 
@@ -68,14 +72,26 @@ googleFormEmbedUrl: "https://docs.google.com/forms/d/e/xxxx/viewform?embedded=tr
 
 把履歷存成 `assets/cv.pdf`（或改 `config.js` 的 `cvUrl` 指向 Google Drive 連結）。
 
-### 5. 更新家長回饋
+### 5. 替換個人網站／作品集連結
 
-取得真實回饋後，編輯 `index.html` 中 `id="testimonials"` 區塊的三段
-`<blockquote>` 文字，並刪除底部「以上為版面示意」那行提示。
+這個連結顯示在 Navbar 旁邊（一進網站就看得到）與「畢業證書」卡片下方，
+讓家長可以點進去了解背景與作品。改 `scripts/config.js`：
 
-### 6. 調整收費
+```js
+personalSiteUrl: "https://your-portfolio-site.example",
+```
 
-價格寫在 `index.html` FAQ 區塊「收費怎麼算？」內（目前為 NT$600–800/hr 的參考區間），請依實際定價修改。
+### 6. 加入真實家長回饋
+
+目前網站**沒有**放任何回饋（避免造假）。取得真實回饋後，可在
+`id="philosophy"` 與 `id="proof"` 之間新增一個區塊，仿照其他 `section` 的
+結構撰寫（標題、`<blockquote class="testimonial">` 卡片），並記得同步在
+`styles/main.css` 補上對應樣式。
+
+### 7. 調整收費
+
+價格寫在 `index.html` FAQ 區塊「收費怎麼算？」內（目前為：試教 300 元；
+國小／國中、高中、程式與 AI 皆為 NT$400–600/hr 起的參考區間），請依實際定價修改。
 
 ## 建議的 Google 表單結構
 
@@ -84,10 +100,10 @@ googleFormEmbedUrl: "https://docs.google.com/forms/d/e/xxxx/viewform?embedded=tr
 | 1 | 家長稱呼（例：王媽媽） | 簡答 | ✓ |
 | 2 | 學生年級 | 下拉：國一／國二／國三／高一／高二／其他 | ✓ |
 | 3 | 就讀學校 | 簡答 | |
-| 4 | 想加強的科目 | 核取方塊：數學／英文／理化／讀書方法／程式／其他 | ✓ |
+| 4 | 想加強的科目 | 核取方塊：數學／英文／程式／AI 入門／讀書方法／其他 | ✓ |
 | 5 | 目前遇到的困難（弱點單元、成績狀況） | 段落 | |
 | 6 | 希望上課時段 | 核取方塊：平日晚上／週六／週日／皆可 | ✓ |
-| 7 | 上課地點 | 單選：到府（新竹市）／到府（竹北）／公共空間／線上／再討論 | ✓ |
+| 7 | 上課地點 | 單選：到府（新竹市）／到府（竹北）／公共空間／再討論 | ✓ |
 | 8 | 聯絡電話 | 簡答 | ✓ |
 | 9 | LINE ID | 簡答 | |
 | 10 | 其他想補充的事 | 段落 | |

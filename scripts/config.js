@@ -22,15 +22,20 @@ const SITE_CONFIG = {
      把 PDF 放到 assets/cv.pdf，或改成其他連結（例如 Google Drive）。 */
   cvUrl: "assets/cv.pdf",
 
+  /* ---- 個人網站／作品集 ----
+     顯示在 Navbar 旁邊與畢業證書卡片下方，讓家長可以點進去了解背景與作品。 */
+  personalSiteUrl: "https://egger-meow.github.io",
+
   /* ---- 圖片 Images ----
      直接把同名檔案覆蓋到 assets/images/ 即可，
-     或在此處改成其他路徑／副檔名（例如 .jpg）。 */
+     或在此處改成其他路徑／副檔名（例如 .jpg）。
+     若之後有其他證明文件（例如英文檢定、獲獎等），
+     可在 index.html 的 proof-grid 內新增一個 <figure> 並在這裡加上對應路徑。 */
   images: {
-    profile:  "assets/images/profile-placeholder.svg",   // 個人照
-    capScore: "assets/images/cert-cap.svg",              // 會考成績單
-    toeic:    "assets/images/cert-toeic.svg",            // 多益證書
-    studentId:"assets/images/cert-student-id.svg",       // 學生證
-    award:    "assets/images/cert-award.svg",            // 獎狀
-    other:    "assets/images/cert-other.svg"             // 其他證明
+    profile:   "assets/images/profile-placeholder.svg",   // 個人照
+    capScore:  "assets/images/cert-cap.svg",               // 會考成績單
+    toeic:     "assets/images/cert-toeic.svg",              // 多益證書
+    admission: "assets/images/cert-admission.svg",          // 陽明交大入學證明
+    diploma:   "assets/images/cert-diploma.svg"              // 陽明交大畢業證書
   }
 };
