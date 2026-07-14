@@ -344,8 +344,9 @@ a { color: var(--primary); }
   color: var(--primary);
   font-size: 1.3rem;
   font-weight: 400;
+  transition: transform 0.3s ease;
 }
-.faq-item[open] summary::after { content: "−"; }
+.faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
 .faq-item p { color: var(--ink-soft); padding-bottom: 16px; margin: 0; }
 
 /* ---------- 聯絡 ---------- */
@@ -451,4 +452,206 @@ a { color: var(--primary); }
   .mobile-cta { display: flex; }
   .header-inner .btn { display: none; }
   .brand-sub { display: none; }
+}
+
+/* =====================================================
+   動效與互動層 Motion & Interaction
+   搭配 scripts/effects.js（未載入時以下大多不生效，
+   網站仍完整可讀）。所有動效尊重 prefers-reduced-motion。
+   ===================================================== */
+
+/* ---------- 捲動進度條 ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 300;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* ---------- 頁首捲動陰影 ---------- */
+.site-header { transition: box-shadow 0.25s ease; }
+.site-header.scrolled { box-shadow: 0 2px 18px rgba(29, 37, 48, 0.1); }
+
+/* ---------- Hover 微互動（用 translate，不與 reveal 的 transform 衝突） ---------- */
+.btn {
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease,
+              translate 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover { translate: 0 -2px; box-shadow: 0 8px 20px rgba(31, 78, 121, 0.28); }
+.btn-line:hover { translate: 0 -2px; box-shadow: 0 8px 20px rgba(6, 199, 85, 0.3); }
+.btn-outline:hover { translate: 0 -2px; }
+
+.card, .subject {
+  transition: translate 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card:hover, .subject:hover {
+  translate: 0 -5px;
+  box-shadow: 0 4px 10px rgba(29, 37, 48, 0.06), 0 18px 40px rgba(29, 37, 48, 0.13);
+}
+.card:hover { border-color: rgba(31, 78, 121, 0.3); }
+
+.proof-item img {
+  cursor: zoom-in;
+  transition: translate 0.25s ease, box-shadow 0.25s ease;
+}
+.proof-item img:hover {
+  translate: 0 -4px;
+  box-shadow: 0 4px 10px rgba(29, 37, 48, 0.06), 0 16px 36px rgba(29, 37, 48, 0.14);
+}
+
+/* ---------- 章節標題底線（隨捲入畫出） ---------- */
+.section h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
+}
+
+/* ---------- FAQ 展開動畫（支援的瀏覽器才生效） ---------- */
+html { interpolate-size: allow-keywords; }
+
+/* ---------- 證明文件燈箱 ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(20, 25, 33, 0.87);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s;
+  cursor: zoom-out;
+}
+.lightbox.open { opacity: 1; visibility: visible; }
+.lightbox img {
+  max-width: min(1100px, 100%);
+  max-height: 90vh;
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  transform: scale(0.94);
+  transition: transform 0.25s ease;
+  cursor: default;
+}
+.lightbox.open img { transform: scale(1); }
+.lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.28); }
+/* 燈箱開啟時隱藏 backdrop-filter 元素（避免瀏覽器把它們畫在遮罩之上） */
+body.lb-open .site-header,
+body.lb-open .mobile-cta,
+body.lb-open .scroll-progress { visibility: hidden; }
+
+/* ---------- 動效（僅在使用者未要求減少動態時） ---------- */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* --- Hero 進場：眉標 → 標題 → 內文 → 標籤 → CTA，照片浮入 --- */
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes photo-in {
+    from { opacity: 0; transform: translateY(26px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  html.js .hero-eyebrow  { animation: rise-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both 0.05s; }
+  html.js .hero h1       { animation: rise-in 0.7s  cubic-bezier(0.16, 1, 0.3, 1) both 0.14s; }
+  html.js .hero-lead     { animation: rise-in 0.7s  cubic-bezier(0.16, 1, 0.3, 1) both 0.24s; }
+  html.js .hero-chips li { animation: rise-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  html.js .hero-chips li:nth-child(1) { animation-delay: 0.34s; }
+  html.js .hero-chips li:nth-child(2) { animation-delay: 0.40s; }
+  html.js .hero-chips li:nth-child(3) { animation-delay: 0.46s; }
+  html.js .hero-chips li:nth-child(4) { animation-delay: 0.52s; }
+  html.js .hero-cta      { animation: rise-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both 0.58s; }
+  html.js .hero-note     { animation: rise-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) both 0.68s; }
+  html.js .hero-photo    { animation: photo-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both 0.3s; }
+
+  /* --- 捲入顯示：先隱藏（:not(.in)），effects.js 加上 .in 後浮現 --- */
+  html.js :where(.section h2, .section-lead, .card, .subject, .diff-list li,
+                 .philosophy-text, .proof-item, .resume-row, .faq-item,
+                 .contact-form-wrap, .contact-aside):not(.in) {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  html.js :where(.section h2, .section-lead, .card, .subject, .diff-list li,
+                 .philosophy-text, .proof-item, .resume-row, .faq-item,
+                 .contact-form-wrap, .contact-aside) {
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                translate 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  /* 標題底線隨捲入畫出 */
+  html.js .section h2:not(.in)::after { transform: scaleX(0); }
+
+  /* 差異化清單的勾勾：彈跳浮現 */
+  .diff-list li::before { transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s; }
+  html.js .diff-list li:not(.in)::before { transform: scale(0); }
+
+  /* --- LINE 按鈕光澤掃過：溫和吸引目光 --- */
+  .hero-cta .btn-line, .contact-aside .btn-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-cta .btn-line::after, .contact-aside .btn-line::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -45%;
+    width: 38%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    animation: sheen 5.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes sheen {
+    0%, 72% { left: -45%; }
+    100%    { left: 145%; }
+  }
+
+  /* --- 作品集連結：輕微呼吸光暈，讓家長注意到 --- */
+  @keyframes link-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(185, 123, 42, 0); }
+    50%      { box-shadow: 0 0 0 5px rgba(185, 123, 42, 0.16); }
+  }
+  .personal-link { animation: link-glow 3.2s ease-in-out infinite; }
+
+  /* --- FAQ 內容平滑展開（Chrome 131+；其他瀏覽器直接展開） --- */
+  .faq-item::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition: block-size 0.35s ease, content-visibility 0.35s allow-discrete;
+  }
+  .faq-item[open]::details-content { block-size: auto; }
+
+  /* --- 手機固定 CTA：載入後從底部滑入 --- */
+  @keyframes cta-up { from { transform: translateY(100%); } }
+  html.js .mobile-cta { animation: cta-up 0.5s ease-out both 0.5s; }
 }
