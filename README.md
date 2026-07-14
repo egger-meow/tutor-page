@@ -26,11 +26,11 @@
 
 | 檔名 | 用途 |
 |---|---|
-| `profile-placeholder.svg` | 個人照（建議比例 380×460，直式） |
-| `cert-cap.svg` | 會考成績單 |
-| `cert-toeic.svg` | 多益證書 |
-| `cert-admission.svg` | 陽明交大入學證明 |
-| `cert-diploma.svg` | 陽明交大畢業證書 |
+| `profile.jpg` | 個人照（建議比例 380×460，直式） |
+| `cert-toeic.jpg` | 多益證書 |
+| `cert-ielts.jpg` | 雅思成績單 |
+| `cert-admission.jpg` | 陽明交大入學證明 |
+| `cert-diploma.jpg` | 陽明交大畢業證書 |
 
 方法 B（用 jpg/png）：把圖片放進 `assets/images/`，然後改 `scripts/config.js` 的 `images` 路徑，例如：
 
@@ -39,6 +39,7 @@ profile: "assets/images/my-photo.jpg",
 ```
 
 > 隱私提醒：證書、入學證明、畢業證書上傳前請遮蔽身分證字號、學號、地址等個資。
+> （目前 `cert-admission.jpg` 已將原始文件上的身分證字號塗黑處理，之後若更換新文件請比照辦理。）
 
 **新增其他證明文件（例如英文檢定、獲獎等）：** 目前網站只顯示已有真實文件的項目，沒有的不放空卡片。之後若有新的證明，做法是：
 1. 把圖片放進 `assets/images/`。

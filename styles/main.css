@@ -278,7 +278,8 @@ a { color: var(--primary); }
 .proof-item img {
   width: 100%;
   aspect-ratio: 3 / 4;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 8px;
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--surface);
