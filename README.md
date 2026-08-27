@@ -28,6 +28,7 @@
 | 檔名 | 用途 |
 |---|---|
 | `profile.jpg` | 個人照（建議比例 380×460，直式） |
+| `junior_test.jpg` | 國中會考 5A9+ 成績單 |
 | `cert-toeic.jpg` | 多益證書 |
 | `cert-ielts.jpg` | 雅思成績單 |
 | `cert-admission.jpg` | 陽明交大入學證明 |
