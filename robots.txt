@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://egger-meow.github.io/tutor-page/sitemap.xml
