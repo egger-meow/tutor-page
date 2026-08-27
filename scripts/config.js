@@ -24,7 +24,7 @@ const SITE_CONFIG = {
 
   /* ---- 個人網站／作品集 ----
      顯示在 Navbar 旁邊與畢業證書卡片下方，讓家長可以點進去了解背景與作品。 */
-  personalSiteUrl: "https://egger-meow.github.io/Me",
+  personalSiteUrl: "https://me.jjmowlab.com",
 
   /* ---- 圖片 Images ----
      直接把同名檔案覆蓋到 assets/images/ 即可，
